@@ -25,6 +25,8 @@
     { "slug": "deepcoin",  "name": "DeepCoin",  "rate": 75, "pop": 3,  "url": "https://www.deepcoin.com/",     "status": "active" },
     { "slug": "flipster",  "name": "Flipster",  "rate": 70, "pop": 4,  "url": "https://flipster.io/",           "status": "active" },
     { "slug": "zoomex",    "name": "Zoomex",    "rate": 50, "pop": 2,  "url": "https://www.zoomex.com/",       "status": "active" },
+    { "slug": "million",   "name": "Million",   "rate": 80, "pop": 2,  "url": "https://www.million.com/",      "status": "active" },
+    { "slug": "mgbx",      "name": "MGBX",      "rate": 80, "pop": 2,  "url": "https://www.mgbx.com/",         "status": "active" },
     { "slug": "puprime",   "name": "PU Prime",   "rate": 60, "pop": 3,  "url": "https://www.puprime.com/",       "status": "active", "type": "Forex" },
     { "slug": "vantage",   "name": "Vantage",    "rate": 55, "pop": 3,  "url": "https://www.vantagemarkets.com/", "status": "active", "type": "Forex" }
   ]

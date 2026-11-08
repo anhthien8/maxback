@@ -149,11 +149,8 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
   </table>
 
   <div class="note">
-    <b>Cách hoạt động:</b> khách bấm một sàn trên trang chủ → mở <code>/reg/&lt;slug&gt;</code> → function
-    <code>api/reg.mjs</code> đọc <code>data/links.json</code> và trả <code>302</code> sang link giới thiệu
-    (kèm referrer đúng để mã giới thiệu được tính).<br>
-    <b>Để link sống trên Vercel:</b> sửa <code>url</code> trong <code>data/links.json</code>, commit, rồi deploy lại.
-    Nút “Xuất links.json” tải file đã sửa để bạn dán vào repo.<br>
+    <b>Cách hoạt động:</b> khách bấm một sàn → <code>/reg/&lt;slug&gt;</code> → Cloudflare Worker đọc link từ database D1 và trả <code>302</code> sang link giới thiệu, đồng thời ghi lượt click.<br>
+    <b>Sửa link:</b> bấm sửa và lưu ở đây, thay đổi có hiệu lực ngay, không cần deploy lại.<br>
     <b>Sàn đã tạm dừng</b> trả trang 503 thay vì chuyển hướng — không bao giờ đẩy khách tới link chết.
   </div>
 </div>
@@ -189,11 +186,11 @@ async function hashPassword(value) {
 }
 async function unlock(value) {
   if (await hashPassword(value) !== ADMIN_HASH) { $("loginError").textContent = "Mật khẩu không đúng."; return; }
-  sessionStorage.setItem("maxback-admin", "1");
+  sessionStorage.setItem("maxback-admin", "1"); sessionStorage.setItem("maxback-pass", value);
   $("loginGate").remove(); $("adminApp").hidden = false; load();
 }
 $("loginForm").addEventListener("submit", ev => { ev.preventDefault(); unlock($("adminPass").value); });
-if (sessionStorage.getItem("maxback-admin") === "1") { $("loginGate").remove(); $("adminApp").hidden = false; }
+if (sessionStorage.getItem("maxback-admin") === "1" && sessionStorage.getItem("maxback-pass")) { $("loginGate").remove(); $("adminApp").hidden = false; }
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const publicLink = slug => location.origin + "/reg/" + slug;
@@ -214,7 +211,7 @@ async function load() {
 }
 async function persist(e) {
   const r = await fetch("../api/links?slug=" + encodeURIComponent(e.slug), {
-    method: "PATCH", headers: {"content-type":"application/json"},
+    method: "PATCH", headers: {"content-type":"application/json", "x-admin-pass": sessionStorage.getItem("maxback-pass") || ""},
     body: JSON.stringify({name:e.name, rate:e.rate, url:e.url, status:e.status, type:e.type || "Crypto"})
   });
   if (!r.ok) throw new Error("Không lưu được (" + r.status + ")");
@@ -326,7 +323,7 @@ $("btnExport").onclick = () => {
   toast("Đã tải links.json — dán vào data/links.json rồi deploy");
 };
 
-if (sessionStorage.getItem("maxback-admin") === "1") load().catch(e => {
+if (sessionStorage.getItem("maxback-pass")) load().catch(e => {
   $("rows").innerHTML = `<tr><td colspan="6" style="color:var(--bad);padding:24px">
     Không tải được data/links.json — ${esc(e.message)}</td></tr>`;
 });

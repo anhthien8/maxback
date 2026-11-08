@@ -1,0 +1,14 @@
+.git
+node_modules
+api
+src
+db
+*.mjs
+*.sql
+wrangler.jsonc
+vercel.json
+.wrangler
+package.json
+package-lock.json
+.gitignore
+.assetsignore

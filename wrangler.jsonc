@@ -1,0 +1,9 @@
+{
+  "name": "maxback",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": ".", "binding": "ASSETS", "run_worker_first": ["/reg/*", "/reg", "/api/*"] },
+  "d1_databases": [{ "binding": "DB", "database_name": "maxback-db", "database_id": "8fd00846-bca2-4477-bc8d-bdbf497b3d7f" }],
+  "vars": { "ADMIN_HASH": "2ca8510cda2265a51cb538da7a4eb15816459d2df165f78f0c9496a844ac5f74" },
+  "routes": [{ "pattern": "vip.cspaceship.agency", "custom_domain": true }]
+}

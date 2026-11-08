@@ -26,6 +26,8 @@ INSERT INTO exchange_links (slug,name,rate,pop,url,status,type) values
 ('zoomex','Zoomex',50,2,'https://www.zoomex.com/','active','Crypto'),
 ('million','Million',80,2,'https://www.million.com/','active','Crypto'),
 ('mgbx','MGBX',80,2,'https://www.mgbx.com/','active','Crypto'),
+('bitbase','Bitbase',40,2,'https://www.bitbase.com/','active','Crypto'),
+('cmc','CMC Markets',40,3,'https://partner-portal.cmcmarkets.com/Affiliates/SignUp?Referral=22062','active','Forex'),
 ('vantage','Vantage',55,3,'https://www.vantagemarkets.com/','active','Forex')
 on conflict (slug) do update set name=excluded.name,rate=excluded.rate,pop=excluded.pop,url=excluded.url,status=excluded.status,type=excluded.type,updated_at=datetime('now');
 

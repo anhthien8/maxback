@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/reg/:slug", "destination": "/api/reg?slug=:slug" },
+    { "source": "/api/reg", "destination": "/api/reg.mjs" },
+    { "source": "/api/links", "destination": "/api/links.mjs" }
+  ],
+  "headers": [
+    { "source": "/admin", "headers": [{ "key": "X-Frame-Options", "value": "DENY" }] }
+  ]
+}

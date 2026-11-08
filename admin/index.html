@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin — Quản lý link cloak | MaxBack</title>
+<style>
+:root{
+  --paper:#121620; --paper2:#171c28; --card:#1b2130; --line:#2a3346;
+  --ink:#e8ecf4; --ink2:#aab3c4; --muted:#7d879b;
+  --accent:#b9b5f5; --accent-deep:#5b53c8; --ok:#4ad9a4; --warn:#f0b46a; --bad:#f2707f;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--font);padding:32px 20px 64px}
+.wrap{max-width:1180px;margin:0 auto}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:24px}
+h1{font-size:24px;letter-spacing:-.02em;font-weight:600}
+h1 small{display:block;font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:4px}
+.stats{display:flex;gap:28px;font-size:13px;color:var(--muted)}
+.stats b{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+.stats .ok b{color:var(--ok)} .stats .pz b{color:var(--warn)}
+
+.toolbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+input[type=search]{flex:1;min-width:200px;background:var(--paper2);border:1px solid var(--line);
+  color:var(--ink);padding:10px 14px;border-radius:9px;font:400 14px var(--font)}
+input[type=search]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.btn{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:10px 16px;border-radius:9px;
+  font:500 13.5px var(--font);cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#1a1533;font-weight:600}
+.btn-primary:hover{background:#cfcbfb;color:#1a1533}
+
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;
+  border:1px solid var(--line)}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+thead th{background:var(--paper2);font:500 12.5px var(--font);color:var(--muted);
+  text-transform:uppercase;letter-spacing:.04em}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+.ex{display:flex;align-items:center;gap:11px}
+.ex img{width:28px;height:28px;border-radius:50%;background:#fff;flex:none}
+.ex .nm{font-weight:500}
+.ex .sl{font:400 12px var(--mono);color:var(--muted)}
+.rate{font-variant-numeric:tabular-nums;font-weight:500}
+
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:99px;white-space:nowrap;
+  font-size:12px;font-weight:500;cursor:pointer;border:1px solid;background:none}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.active{color:var(--ok);border-color:rgba(74,217,164,.4);background:rgba(74,217,164,.08)}
+.pill.paused{color:var(--warn);border-color:rgba(240,180,106,.4);background:rgba(240,180,106,.08)}
+.pill:hover{filter:brightness(1.2)}
+
+.urlcell{max-width:340px}
+.urlcell a{color:var(--ink2);font:400 12.5px var(--mono);text-decoration:none;
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.urlcell a:hover{color:var(--accent);text-decoration:underline}
+.urlcell .empty{color:var(--bad);font-size:12.5px}
+
+.copy{display:flex;align-items:center;gap:8px}
+.copy code{font:400 12.5px var(--mono);color:var(--accent);
+  background:rgba(185,181,245,.09);padding:5px 9px;border-radius:6px;flex:1;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;
+  padding:4px 8px;font-size:11.5px;cursor:pointer;flex:none}
+.copy button:hover{border-color:var(--accent);color:var(--accent)}
+.copy button.done{color:var(--ok);border-color:var(--ok)}
+
+.actions{display:flex;gap:6px}
+.actions button{background:none;border:1px solid var(--line);color:var(--ink2);border-radius:7px;
+  padding:6px 11px;font-size:12.5px;cursor:pointer}
+.actions button:hover{border-color:var(--accent);color:var(--accent)}
+.actions button.danger:hover{border-color:var(--bad);color:var(--bad)}
+
+.note{margin-top:22px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;
+  background:var(--paper2);font-size:13px;color:var(--muted);line-height:1.7}
+.note b{color:var(--ink2);font-weight:500}
+.note code{font:400 12.5px var(--mono);color:var(--accent)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--accent);color:#1a1533;padding:11px 22px;border-radius:99px;font-weight:600;
+  font-size:14px;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(8,10,16,.7);display:none;place-items:center;padding:20px;z-index:20}
+.overlay.open{display:grid}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;
+  width:100%;max-width:480px}
+.modal h2{font-size:18px;margin-bottom:4px}
+.modal .sub{color:var(--muted);font-size:13.5px;margin-bottom:20px}
+.modal label{display:block;font-size:13px;color:var(--muted);margin:16px 0 7px}
+.modal input{width:100%;background:var(--paper2);border:1px solid var(--line);color:var(--ink);
+  padding:11px 13px;border-radius:8px;font:400 14px var(--font)}
+.modal input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.modal input[readonly]{color:var(--muted);font-family:var(--mono);font-size:13px}
+.modal .foot{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+
+@media(max-width:820px){
+  .stats{gap:18px}
+  th,td{padding:11px 10px}
+  .urlcell{display:none} thead th:nth-child(3){display:none}
+}
+</style>
+<style>
+#loginGate{position:fixed;inset:0;background:#07111f;display:grid;place-items:center;z-index:100;padding:20px}
+#loginGate form{width:min(380px,100%);background:#0f2135;border:1px solid #29415a;border-radius:14px;padding:28px;box-shadow:0 24px 80px #020812}
+#loginGate h1{font-size:22px;margin-bottom:6px} #loginGate p{color:#8fa7bd;font-size:13px;margin-bottom:18px}
+#loginGate input{width:100%;background:#091827;border:1px solid #35506a;color:#f4f8fc;padding:12px;border-radius:8px;font:15px system-ui}
+#loginGate button{width:100%;margin-top:14px;background:#63e6be;border:0;border-radius:8px;padding:12px;color:#04150f;font-weight:700;cursor:pointer}
+#loginError{color:#ff8795;font-size:13px;margin-top:10px;min-height:20px}
+</style>
+</head>
+<body>
+<div id="loginGate"><form id="loginForm"><h1>MaxBack Admin</h1><p>Đăng nhập để quản lý link cloak.</p><input id="adminPass" type="password" placeholder="Mật khẩu" autocomplete="current-password" required><button>Đăng nhập</button><div id="loginError"></div></form></div>
+<div class="wrap" id="adminApp" hidden>
+  <header>
+    <div>
+      <h1>Quản lý link cloak<small>MaxBack · /reg/&lt;ten-san&gt; chuyển hướng tới link giới thiệu</small></h1>
+    </div>
+    <div class="stats">
+      <div><b id="stTotal">0</b>Tổng sàn</div>
+      <div class="ok"><b id="stActive">0</b>Đang chạy</div>
+      <div class="pz"><b id="stPaused">0</b>Tạm dừng</div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Tìm theo tên hoặc slug…" aria-label="Tìm kiếm">
+    <button class="btn" id="btnAll">Hiện tất cả</button>
+    <button class="btn" id="btnActive">Chỉ đang chạy</button>
+    <button class="btn" id="btnPaused">Chỉ tạm dừng</button>
+    <button class="btn" id="btnBulkRate">Đổi cashback hàng loạt</button>
+    <button class="btn btn-primary" id="btnExport">Xuất links.json</button>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th style="width:30%">Sàn</th>
+      <th style="width:10%">Cashback</th>
+      <th style="width:24%">Đích cloak</th>
+      <th style="width:22%">Link công khai</th>
+      <th style="width:9%">Trạng thái</th>
+      <th style="width:5%"></th>
+    </tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <div class="note">
+    <b>Cách hoạt động:</b> khách bấm một sàn trên trang chủ → mở <code>/reg/&lt;slug&gt;</code> → function
+    <code>api/reg.mjs</code> đọc <code>data/links.json</code> và trả <code>302</code> sang link giới thiệu
+    (kèm referrer đúng để mã giới thiệu được tính).<br>
+    <b>Để link sống trên Vercel:</b> sửa <code>url</code> trong <code>data/links.json</code>, commit, rồi deploy lại.
+    Nút “Xuất links.json” tải file đã sửa để bạn dán vào repo.<br>
+    <b>Sàn đã tạm dừng</b> trả trang 503 thay vì chuyển hướng — không bao giờ đẩy khách tới link chết.
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h2 id="mTitle">Sửa sàn</h2>
+    <p class="sub" id="mSub"></p>
+    <label>Sàn</label>
+    <input id="mName" readonly>
+    <label>Slug (dùng trong /reg/…)</label>
+    <input id="mSlug" readonly>
+    <label for="mUrl">Link giới thiệu thực tế</label>
+    <input id="mUrl" type="url" placeholder="https://www.san.com/register?ref=MACODE" autocomplete="off">
+    <label for="mRate">Tỷ lệ cashback (%)</label>
+    <input id="mRate" type="number" min="0" max="100" step="1">
+    <div class="foot">
+      <button class="btn" id="mCancel">Huỷ</button>
+      <button class="btn btn-primary" id="mSave">Lưu</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let DATA = null;
+let editing = null;
+const ADMIN_HASH = "2ca8510cda2265a51cb538da7a4eb15816459d2df165f78f0c9496a844ac5f74";
+const $ = id => document.getElementById(id);
+async function hashPassword(value) {
+  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return [...new Uint8Array(bytes)].map(x => x.toString(16).padStart(2, "0")).join("");
+}
+async function unlock(value) {
+  if (await hashPassword(value) !== ADMIN_HASH) { $("loginError").textContent = "Mật khẩu không đúng."; return; }
+  sessionStorage.setItem("maxback-admin", "1");
+  $("loginGate").remove(); $("adminApp").hidden = false; load();
+}
+$("loginForm").addEventListener("submit", ev => { ev.preventDefault(); unlock($("adminPass").value); });
+if (sessionStorage.getItem("maxback-admin") === "1") { $("loginGate").remove(); $("adminApp").hidden = false; }
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const publicLink = slug => location.origin + "/reg/" + slug;
+
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+async function load() {
+  const r = await fetch("../api/links", { cache: "no-store" });
+  if (!r.ok) throw new Error("API links trả về " + r.status);
+  DATA = await r.json();
+  render();
+}
+async function persist(e) {
+  const r = await fetch("../api/links?slug=" + encodeURIComponent(e.slug), {
+    method: "PATCH", headers: {"content-type":"application/json"},
+    body: JSON.stringify({name:e.name, rate:e.rate, url:e.url, status:e.status, type:e.type || "Crypto"})
+  });
+  if (!r.ok) throw new Error("Không lưu được (" + r.status + ")");
+}
+
+function render() {
+  const q = $("q").value.trim().toLowerCase();
+  const filter = render.filter || "all";
+  const list = DATA.exchanges.filter(e => {
+    if (filter !== "all" && e.status !== filter) return false;
+    if (!q) return true;
+    return e.name.toLowerCase().includes(q) || e.slug.includes(q);
+  });
+
+  $("stTotal").textContent = DATA.exchanges.length;
+  $("stActive").textContent = DATA.exchanges.filter(e => e.status === "active").length;
+  $("stPaused").textContent = DATA.exchanges.filter(e => e.status !== "active").length;
+
+  $("rows").innerHTML = list.map(e => `
+    <tr>
+      <td><div class="ex">
+        <img src="../logos/${esc(e.slug)}.png" alt="" width="28" height="28" loading="lazy">
+        <div><div class="nm">${esc(e.name)}</div><div class="sl">${esc(e.slug)}</div></div>
+      </div></td>
+      <td class="rate">${e.rate ? e.rate + "%" : "—"}</td>
+      <td class="urlcell">${e.url
+        ? `<a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer" title="${esc(e.url)}">${esc(e.url)}</a>`
+        : `<span class="empty">Chưa có link</span>`}</td>
+      <td><div class="copy">
+        <code title="${esc(publicLink(e.slug))}">/reg/${esc(e.slug)}</code>
+        <button data-copy="${esc(e.slug)}">Copy</button>
+      </div></td>
+      <td><button class="pill ${e.status}" data-toggle="${esc(e.slug)}" title="Bấm để đổi trạng thái">${e.status === "active" ? "Đang chạy" : "Tạm dừng"}</button></td>
+      <td><div class="actions">
+        <button data-edit="${esc(e.slug)}">Sửa</button>
+      </div></td>
+    </tr>`).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:34px">Không có sàn nào khớp.</td></tr>`;
+}
+render.filter = "all";
+
+document.addEventListener("click", async ev => {
+  const t = ev.target.closest("button");
+  if (!t) return;
+
+  if (t.dataset.copy) {
+    const slug = t.dataset.copy;
+    try { await navigator.clipboard.writeText(publicLink(slug)); } catch {
+      const ta = document.createElement("textarea");
+      ta.value = publicLink(slug); document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); ta.remove();
+    }
+    t.textContent = "Đã copy"; t.classList.add("done");
+    setTimeout(() => { t.textContent = "Copy"; t.classList.remove("done"); }, 1400);
+    return;
+  }
+
+  if (t.dataset.toggle) {
+    const e = DATA.exchanges.find(x => x.slug === t.dataset.toggle);
+    e.status = e.status === "active" ? "paused" : "active";
+    try { await persist(e); render(); toast(e.name + " → " + (e.status === "active" ? "đang chạy" : "tạm dừng")); }
+    catch (err) { e.status = e.status === "active" ? "paused" : "active"; toast(err.message); }
+    return;
+  }
+
+  if (t.dataset.edit) {
+    editing = DATA.exchanges.find(x => x.slug === t.dataset.edit);
+    $("mName").value = editing.name;
+    $("mSlug").value = editing.slug;
+    $("mUrl").value = editing.url || "";
+    $("mRate").value = editing.rate || 0;
+    $("mSub").textContent = "Link công khai: " + publicLink(editing.slug);
+    $("overlay").classList.add("open");
+    setTimeout(() => $("mUrl").focus(), 50);
+  }
+});
+
+$("mCancel").onclick = () => $("overlay").classList.remove("open");
+$("overlay").addEventListener("click", ev => { if (ev.target.id === "overlay") $("overlay").classList.remove("open"); });
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") $("overlay").classList.remove("open"); });
+
+$("mSave").onclick = () => {
+  const url = $("mUrl").value.trim();
+  if (url && !/^https?:\/\//i.test(url)) { toast("Link phải bắt đầu bằng http(s)://"); return; }
+  editing.url = url;
+  editing.rate = Math.max(0, Math.min(100, +$("mRate").value || 0));
+  persist(editing).then(() => { $("overlay").classList.remove("open"); render(); toast("Đã lưu " + editing.name); }).catch(err => toast(err.message));
+};
+
+$("q").addEventListener("input", render);
+$("btnAll").onclick = () => { render.filter = "all"; render(); };
+$("btnActive").onclick = () => { render.filter = "active"; render(); };
+$("btnPaused").onclick = () => { render.filter = "paused"; render(); };
+$("btnBulkRate").onclick = () => {
+  const value = prompt("Nhập tỷ lệ cashback áp dụng cho tất cả sàn (0–100):", "70");
+  if (value === null) return;
+  const rate = Number(value);
+  if (!Number.isFinite(rate) || rate < 0 || rate > 100) { toast("Tỷ lệ phải từ 0 đến 100%"); return; }
+  DATA.exchanges.forEach(e => { e.rate = Math.round(rate); });
+  Promise.all(DATA.exchanges.map(persist)).then(() => { render(); toast("Đã đổi cashback tất cả sàn thành " + Math.round(rate) + "%"); }).catch(err => toast(err.message));
+};
+
+$("btnExport").onclick = () => {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "links.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Đã tải links.json — dán vào data/links.json rồi deploy");
+};
+
+if (sessionStorage.getItem("maxback-admin") === "1") load().catch(e => {
+  $("rows").innerHTML = `<tr><td colspan="6" style="color:var(--bad);padding:24px">
+    Không tải được data/links.json — ${esc(e.message)}</td></tr>`;
+});
+</script>
+</body>
+</html>

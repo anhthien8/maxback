@@ -1,0 +1,28 @@
+{
+  "_note": "Đích cloak cho từng sàn. Doi 'url' thanh link gioi thieu that cua ban. 'slug' phai khop ten file logo trong /logos.",
+  "exchanges": [
+    { "slug": "bitget",    "name": "Bitget",    "rate": 90, "pop": 10, "url": "https://www.bitget.com/",        "status": "active" },
+    { "slug": "woox",      "name": "WOO X",     "rate": 90, "pop": 5,  "url": "https://woo.org/",               "status": "active" },
+    { "slug": "toobit",    "name": "Toobit",    "rate": 85, "pop": 5,  "url": "https://www.toobit.com/",        "status": "active" },
+    { "slug": "bitunix",   "name": "Bitunix",   "rate": 85, "pop": 3,  "url": "https://www.bitunix.com/",       "status": "active" },
+    { "slug": "weex",      "name": "WEEX",      "rate": 82, "pop": 3,  "url": "https://www.weex.com/en/register?vipCode=kolglobal", "status": "active" },
+    { "slug": "bybit",     "name": "Bybit",     "rate": 80, "pop": 9,  "url": "https://www.bybit.com/",         "status": "active" },
+    { "slug": "mexc",      "name": "MEXC",      "rate": 80, "pop": 7,  "url": "https://www.mexc.com/",          "status": "active" },
+    { "slug": "gate",      "name": "Gate",      "rate": 80, "pop": 6,  "url": "https://www.gate.io/",           "status": "active" },
+    { "slug": "coinw",     "name": "CoinW",     "rate": 80, "pop": 4,  "url": "https://www.coinw.com/",         "status": "active" },
+    { "slug": "xt",        "name": "XT.com",    "rate": 80, "pop": 3,  "url": "https://www.xt.com/",            "status": "active" },
+    { "slug": "ueex",      "name": "UEEx",      "rate": 80, "pop": 1,  "url": "https://www.ueex.com/",          "status": "active" },
+    { "slug": "bingx",     "name": "BingX",     "rate": 78, "pop": 6,  "url": "https://bingx.com/",             "status": "active" },
+    { "slug": "lbank",     "name": "LBank",     "rate": 78, "pop": 2,  "url": "https://www.lbank.com/",         "status": "active" },
+    { "slug": "okx",       "name": "OKX",       "rate": 75, "pop": 8,  "url": "https://www.okx.com/",           "status": "active" },
+    { "slug": "phemex",    "name": "Phemex",    "rate": 75, "pop": 4,  "url": "https://phemex.com/",            "status": "active" },
+    { "slug": "bitrue",    "name": "Bitrue",    "rate": 75, "pop": 2,  "url": "https://www.bitrue.com/",        "status": "active" },
+    { "slug": "digifinex", "name": "DigiFinex", "rate": 75, "pop": 2,  "url": "https://www.digifinex.com/",     "status": "active" },
+    { "slug": "kucoin",    "name": "KuCoin",    "rate": 72, "pop": 6,  "url": "https://www.kucoin.com/",        "status": "active" },
+    { "slug": "htx",       "name": "HTX",       "rate": 70, "pop": 5,  "url": "https://www.htx.com/",           "status": "active" },
+    { "slug": "blofin",    "name": "BloFin",    "rate": 70, "pop": 4,  "url": "https://blofin.com/",            "status": "active" },
+    { "slug": "binance",   "name": "Binance",   "rate": 70, "pop": 0,  "url": "https://www.binance.com/",       "status": "active" },
+    { "slug": "puprime",   "name": "PU Prime",   "rate": 60, "pop": 3,  "url": "https://www.puprime.com/",       "status": "active", "type": "Forex" },
+    { "slug": "vantage",   "name": "Vantage",    "rate": 55, "pop": 3,  "url": "https://www.vantagemarkets.com/", "status": "active", "type": "Forex" }
+  ]
+}

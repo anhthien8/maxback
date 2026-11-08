@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta.title">MaxBack — Hoàn phí giao dịch Crypto tới 90% bằng USDT</title>
+<meta name="description" data-i18n-content="meta.desc" content="Nhận lại tới 90% phí giao dịch futures bằng USDT. Đối tác chính thức của 19 sàn giao dịch. Không rủi ro tài khoản, thanh toán tự động hàng ngày.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600&family=Wix+Madefor+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* dusk: fog/periwinkle-apricot/glass · narrative rows, no stat tiles · hero photo: Hallmark dusk library (fog.jpg, estuary.jpg) */
+:root {
+  --color-paper: oklch(17.5% 0.014 268); --color-paper-2: oklch(21% 0.016 268); --color-paper-3: oklch(25% 0.017 268);
+  --color-ink: oklch(96% 0.006 75); --color-ink-2: oklch(85% 0.010 262); --color-muted: oklch(70% 0.016 262);
+  --color-rule: oklch(30% 0.016 266); --color-light: oklch(100% 0 0); --color-shade: oklch(10% 0.022 268);
+  --color-accent: oklch(77% 0.10 274); --color-accent-ink: oklch(19% 0.035 274); --color-accent-hi: oklch(84% 0.085 274);
+  --color-accent-deep: oklch(44% 0.13 274); --color-focus: oklch(80% 0.10 274);
+  --color-accent-2: oklch(83% 0.095 62);
+  --color-day-ink: oklch(22% 0.022 268); --color-day-muted: oklch(38% 0.022 266); --color-fog: oklch(94% 0.012 70);
+  --color-well: oklch(95.5% 0.008 75); --color-well-2: oklch(92% 0.010 75); --color-well-ink: oklch(21% 0.016 268);
+  --color-well-muted: oklch(47% 0.016 265); --color-well-rule: oklch(87.5% 0.009 75); --color-card: oklch(99.5% 0.003 75);
+  --glass: oklch(22% 0.018 268 / 0.58); --glass-blur: 22px;
+  --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.10), inset 0 0 0 1px oklch(100% 0 0 / 0.06);
+  --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.06) inset, 0 40px 80px -32px oklch(8% 0.02 268 / 0.7);
+  --font-display: "Wix Madefor Display", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Wix Madefor Text", ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 18px; --radius-inner: 10px; --radius-pill: 999px;
+  --tracking-display: -0.022em;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--color-paper); color: var(--color-ink); font: 400 17px/1.55 var(--font-body); overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: var(--tracking-display); line-height: 1.08; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.num { font-variant-numeric: tabular-nums; }
+.num .c { color: var(--color-muted); }
+.lead { color: var(--color-ink-2); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px;
+  border: 0; border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-accent-ink);
+  font: 600 15px/1 var(--font-body); cursor: pointer; transition: background .18s ease, box-shadow .18s ease;
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent); }
+.btn:hover { background: var(--color-accent-hi); box-shadow: 0 0 0 4px oklch(77% 0.10 274 / 0.25), inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent); }
+.btn-ghost { background: oklch(100% 0 0 / 0.04); color: var(--color-ink); box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.14); }
+.btn-ghost:hover { background: oklch(100% 0 0 / 0.08); box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.22); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+.glass { background: var(--glass); border-radius: var(--radius-card);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.35); backdrop-filter: blur(var(--glass-blur)) saturate(1.35);
+  box-shadow: var(--glass-hi), var(--shadow-card); }
+
+/* ---- nav ---- */
+header { position: sticky; top: 0; z-index: 50; transition: background .3s ease, box-shadow .3s ease; }
+/* over the hero the header stays transparent so the photograph runs edge to edge behind it */
+header:not(.scrolled) { background: transparent; }
+header.scrolled { background: oklch(17.5% 0.014 268 / 0.82); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-rule); box-shadow: 0 8px 24px -16px oklch(8% 0.02 268 / 0.8); }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.logo { font-family: var(--font-display); font-weight: 600; font-size: 21px; letter-spacing: -0.02em; color: var(--color-ink); }
+.logo em { font-style: normal; color: var(--color-accent); }
+/* over the hero the top band of the photograph is pale sky, so the nav takes day ink until the header leaves it */
+header:not(.scrolled) .logo { color: var(--color-day-ink); }
+header:not(.scrolled) .logo em { color: var(--color-accent-deep); }
+.nav-links { display: flex; gap: 28px; font-size: 15px; }
+.nav-links a { color: var(--color-muted); }
+.nav-links a:hover { color: var(--color-ink); }
+header:not(.scrolled) .nav-links a { color: var(--color-day-muted); }
+header:not(.scrolled) .nav-links a:hover { color: var(--color-day-ink); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right .btn { min-height: 42px; padding: 0 22px; font-size: 14px; }
+.lang { appearance: none; -webkit-appearance: none; border: 0; border-radius: var(--radius-pill); padding: 9px 32px 9px 14px; font: 500 13.5px var(--font-body);
+  background-color: oklch(100% 0 0 / 0.07);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23aabbcc' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  color: var(--color-ink); cursor: pointer; box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.12); min-width: 118px; }
+[dir=rtl] .lang { padding: 9px 14px 9px 32px; background-position: left 12px center; }
+header:not(.scrolled) .lang { background-color: oklch(22% 0.022 268 / 0.07); color: var(--color-ink); box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.14); }
+.lang option { background: var(--color-paper-2); color: var(--color-ink); }
+@media (max-width: 860px) { .nav-links { display: none; } }
+
+/* ---- hero ---- */
+/* pulled up under the sticky bar so no paper background shows above the photograph */
+.hero { position: relative; margin-top: -68px; min-height: 100vh; display: flex; align-items: center; padding: 178px 0 140px; }
+.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__photo { animation: drift 48s ease-in-out infinite alternate; }
+  @keyframes drift { from { transform: scale(1.02) translateX(0); } to { transform: scale(1.02) translateX(-3%); } }
+}
+.hero__scrim { position: absolute; inset: 0;
+  background: radial-gradient(ellipse 52% 60% at 24% 50%, color-mix(in oklab, var(--color-fog) 76%, transparent), transparent 78%),
+              linear-gradient(to bottom, transparent 70%, var(--color-paper)); }
+[dir=rtl] .hero__scrim { background: radial-gradient(ellipse 52% 60% at 76% 50%, color-mix(in oklab, var(--color-fog) 76%, transparent), transparent 78%),
+              linear-gradient(to bottom, transparent 70%, var(--color-paper)); }
+.hero__inner { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; width: 100%; }
+@media (max-width: 920px) { .hero__inner { grid-template-columns: 1fr; } .hero { padding-top: 140px; } }
+.hero h1 { font-size: clamp(34px, 5vw, 56px); color: var(--color-day-ink); max-width: 560px; }
+.hero .sub { margin: 20px 0 30px; font-size: clamp(16px, 2vw, 19px); color: var(--color-day-muted); max-width: 480px; }
+.hero .sub strong { color: var(--color-day-ink); }
+.hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero__note { margin-top: 18px; font-size: 14px; color: var(--color-day-muted); }
+
+/* hero glass product */
+.panel { padding: 26px 26px 20px; color: var(--color-ink); }
+.panel__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.panel__title { font-size: 14px; color: var(--color-muted); }
+.panel__period { font-size: 13px; color: var(--color-muted); }
+.panel__sum { font-family: var(--font-display); font-weight: 500; font-size: 40px; letter-spacing: var(--tracking-display); }
+.panel__sum .c { font-size: 0.6em; }
+.panel__rows { margin-top: 18px; }
+.prow { display: flex; align-items: center; gap: 12px; padding: 12px 2px; border-top: 1px solid oklch(100% 0 0 / 0.07); font-size: 14.5px; border-radius: 6px; transition: background .15s ease; }
+a.prow:hover { background: oklch(100% 0 0 / 0.05); }
+.prow img { width: 26px; height: 26px; border-radius: 50%; }
+.prow .nm { font-weight: 500; }
+.prow .meta { color: var(--color-muted); font-size: 13px; }
+.prow .amt { margin-inline-start: auto; font-weight: 500; }
+.prow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .prow .dot { animation: breathe 2.4s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .prow { opacity: 0; transform: translateY(8px); animation: rise .5s ease forwards; }
+  .prow:nth-child(1){animation-delay:.15s} .prow:nth-child(2){animation-delay:.3s} .prow:nth-child(3){animation-delay:.45s} .prow:nth-child(4){animation-delay:.6s}
+  @keyframes rise { to { opacity: 1; transform: none; } }
+}
+.claim { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: oklch(83% 0.095 62 / 0.14); border: 1px solid oklch(83% 0.095 62 / 0.35); border-radius: var(--radius-inner); padding: 12px 16px; font-size: 14px; }
+.claim b { color: var(--color-accent-2); }
+.claim a { font-weight: 600; color: var(--color-accent-2); white-space: nowrap; }
+.claim a:hover { text-decoration: underline; }
+
+/* ---- tally ---- */
+.tally { border-top: 1px solid var(--color-rule); border-bottom: 1px solid var(--color-rule); }
+.tally .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tcell { padding: 28px 20px; border-inline-start: 1px solid var(--color-rule); }
+.tcell:first-child { border-inline-start: 0; padding-inline-start: 0; }
+.tcell .v { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 3vw, 36px); letter-spacing: var(--tracking-display); }
+.tcell .k { margin-top: 2px; font-size: 14px; color: var(--color-muted); }
+@media (max-width: 720px) { .tally .wrap { grid-template-columns: 1fr 1fr; } .tcell:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; } .tcell { padding: 20px 16px; } }
+
+section { padding: 96px 0; }
+.sec-head { max-width: 560px; margin-bottom: 48px; }
+.sec-head h2 { font-size: clamp(27px, 3.6vw, 40px); }
+.sec-head p { margin-top: 12px; color: var(--color-muted); }
+
+/* ---- calculator (bone well) ---- */
+.well { background: var(--color-well); border-radius: var(--radius-card); color: var(--color-well-ink); padding: clamp(28px, 4vw, 52px); }
+.well .sec-head h2 { color: var(--color-well-ink); }
+.well .sec-head p { color: var(--color-well-muted); }
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
+@media (max-width: 860px) { .calc { grid-template-columns: 1fr; } }
+.calc label { display: block; font-size: 14px; color: var(--color-well-muted); margin: 22px 0 8px; }
+.calc label:first-child { margin-top: 0; }
+.calc .range-val { font-weight: 600; color: var(--color-well-ink); }
+.calc input[type=range] { width: 100%; accent-color: var(--color-accent-deep); }
+.calc select { width: 100%; background: var(--color-card); border: 1px solid var(--color-well-rule); color: var(--color-well-ink);
+  padding: 12px 14px; border-radius: var(--radius-inner); font: 400 15px var(--font-body); }
+.card { background: var(--color-card); border-radius: var(--radius-inner); padding: 30px; box-shadow: 0 1px 2px oklch(21% 0.016 268 / 0.08); }
+.card .cap { font-size: 14px; color: var(--color-well-muted); }
+.card .big { font-family: var(--font-display); font-weight: 500; font-size: clamp(36px, 4.5vw, 46px); letter-spacing: var(--tracking-display); margin: 6px 0 4px; }
+.card .big .c { color: var(--color-well-muted); font-size: 0.6em; }
+.crow { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--color-well-rule); font-size: 15px; color: var(--color-well-muted); }
+.crow b { color: var(--color-well-ink); font-weight: 500; }
+.crow.owed b { color: oklch(55% 0.13 62); }
+/* on a light surface the primary takes the deep signal; light periwinkle fails contrast on white */
+.card .btn { width: 100%; margin-top: 20px; background: var(--color-accent-deep); color: var(--color-card);
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.18); }
+.card .btn:hover { background: oklch(38% 0.13 274); box-shadow: 0 0 0 4px oklch(44% 0.13 274 / 0.18); }
+
+/* ---- steps: ruled list ---- */
+.steps { border-top: 1px solid var(--color-rule); }
+.steprow { display: grid; grid-template-columns: 54px 1fr 1.1fr; gap: 20px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--color-rule); }
+.steprow .n { font-family: var(--font-display); font-weight: 500; font-size: 28px; color: var(--color-accent); }
+.steprow h3 { font-size: 19px; }
+.steprow p { color: var(--color-muted); font-size: 15.5px; }
+@media (max-width: 720px) { .steprow { grid-template-columns: 44px 1fr; } .steprow p { grid-column: 2; } }
+
+/* ---- exchanges: account list ---- */
+.sort { display: flex; gap: 22px; margin-bottom: 8px; font-size: 14.5px; }
+.sort button { background: none; border: 0; color: var(--color-muted); font: 500 14.5px var(--font-body); cursor: pointer; padding: 8px 0; display: flex; align-items: center; gap: 8px; }
+.sort button::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1px var(--color-rule); }
+.sort button.active { color: var(--color-ink); }
+.sort button.active::before { background: var(--color-accent); box-shadow: none; }
+.exlist { border-top: 1px solid var(--color-rule); }
+.exrow { display: flex; align-items: center; gap: 16px; padding: 15px 4px; border-bottom: 1px solid var(--color-rule); transition: background .15s ease, padding .15s ease; }
+.exrow:hover { background: oklch(100% 0 0 / 0.03); padding-inline: 10px 8px; }
+.exrow img { width: 32px; height: 32px; border-radius: 50%; background: var(--color-light); flex: none; }
+.exrow .nm { font-weight: 500; font-size: 16px; }
+.exrow .tag { font-size: 13.5px; color: var(--color-muted); }
+.exrow .rate { margin-inline-start: auto; font-family: var(--font-display); font-weight: 500; font-size: 24px; letter-spacing: var(--tracking-display); }
+.exrow .rate small { font-size: 14px; color: var(--color-muted); font-weight: 400; margin-inline-start: 4px; }
+.exrow .go { color: var(--color-muted); font-size: 18px; opacity: 0; transition: opacity .15s ease, transform .15s ease; flex: none; }
+.exrow:hover .go { opacity: 1; color: var(--color-accent); }
+[dir=rtl] .exrow .go { transform: scaleX(-1); }
+.ex-note { margin-top: 16px; font-size: 14px; color: var(--color-muted); }
+.ex-note b { color: var(--color-accent-2); font-weight: 500; }
+
+/* ---- comparison in a well ---- */
+.cmp-well { background: var(--color-well); border-radius: var(--radius-card); padding: clamp(24px, 3.5vw, 44px); color: var(--color-well-ink); }
+.cmp-well h2 { color: var(--color-well-ink); font-size: clamp(25px, 3.2vw, 34px); max-width: 520px; }
+.cmp-well .intro { color: var(--color-well-muted); margin: 10px 0 30px; max-width: 520px; }
+.cmp-scroll { overflow-x: auto; }
+table.cmp { width: 100%; min-width: 680px; border-collapse: collapse; background: var(--color-card); border-radius: var(--radius-inner); overflow: hidden; font-size: 15px; }
+.cmp th, .cmp td { padding: 15px 18px; text-align: start; border-bottom: 1px solid var(--color-well-rule); vertical-align: top; }
+.cmp thead th { font: 500 14px var(--font-body); color: var(--color-well-muted); background: var(--color-well-2); }
+.cmp td:first-child { color: var(--color-well-muted); font-size: 14px; }
+.cmp .yes { color: oklch(44% 0.13 274); font-weight: 600; }
+.cmp .no { color: oklch(55% 0.13 62); }
+.cmp tbody tr:last-child td { border-bottom: 0; }
+
+/* ---- live feed: glass ---- */
+.feed { max-width: 720px; }
+.feed-head { display: flex; align-items: center; gap: 10px; padding: 18px 24px; border-bottom: 1px solid oklch(100% 0 0 / 0.07); font-weight: 500; font-size: 15.5px; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); }
+@media (prefers-reduced-motion: no-preference) { .live-dot { animation: breathe 1.8s ease-in-out infinite; } }
+.frow { display: grid; grid-template-columns: 1.3fr 1fr 0.9fr 0.8fr; gap: 10px; padding: 13px 24px; font-size: 14px; border-bottom: 1px solid oklch(100% 0 0 / 0.07); }
+.frow:last-child { border-bottom: 0; }
+.frow .amt { font-weight: 500; }
+.frow .st { color: var(--color-muted); }
+.frow .st.done { color: var(--color-accent); }
+.frow .st.open { color: var(--color-accent-2); }
+.frow .tm { color: var(--color-muted); }
+.fhead { font-size: 12.5px; color: var(--color-muted); }
+@media (prefers-reduced-motion: no-preference) { .frow.new { animation: rise .4s ease; } }
+@media (max-width: 560px) { .frow { grid-template-columns: 1.3fr 1fr 0.8fr; } .frow .tm { display: none; } }
+
+/* ---- faq ---- */
+.faq { max-width: 720px; border-top: 1px solid var(--color-rule); }
+.faq details { border-bottom: 1px solid var(--color-rule); }
+.faq summary { padding: 20px 4px; cursor: pointer; font: 500 16.5px var(--font-display); letter-spacing: -0.01em; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 22px; color: var(--color-accent); transition: transform .2s ease; flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .body { padding: 0 4px 22px; color: var(--color-muted); font-size: 15.5px; max-width: 620px; }
+
+/* ---- closing: second photo + form ---- */
+.close { position: relative; padding: 140px 0; }
+.close__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.close__scrim { position: absolute; inset: 0;
+  background: radial-gradient(ellipse 62% 72% at 50% 48%, color-mix(in oklab, var(--color-fog) 88%, transparent), transparent 84%),
+              linear-gradient(to bottom, var(--color-paper), transparent 26%),
+              linear-gradient(to top, var(--color-paper), transparent 28%); }
+.close__inner { position: relative; text-align: center; max-width: 640px; margin: 0 auto; }
+.close h2 { font-size: clamp(28px, 4vw, 42px); color: var(--color-day-ink); }
+.close p { margin: 16px 0 30px; color: var(--color-day-ink); font-size: 17px; }
+.signup { display: flex; max-width: 460px; margin: 0 auto; border-radius: var(--radius-pill);
+  background: color-mix(in oklab, var(--color-fog) 82%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px oklch(22% 0.022 268 / 0.14); padding: 5px; }
+.signup input { flex: 1; min-width: 0; border: 0; background: none; padding: 0 18px; font: 400 15px var(--font-body); color: var(--color-day-ink); }
+.signup input::placeholder { color: var(--color-day-muted); }
+.signup input:focus { outline: none; }
+.signup .btn { flex: none; }
+.signup-note { margin-top: 14px; font-size: 13.5px; color: var(--color-day-ink); min-height: 20px; }
+
+/* ---- Blofin-inspired fintech layer ---- */
+:root {
+  --color-paper: #07111f; --color-paper-2: #0b192b; --color-paper-3: #10243a;
+  --color-ink: #f4f8fc; --color-ink-2: #b7c7d8; --color-muted: #7f95ab;
+  --color-rule: rgba(145,174,203,.16); --color-shade: #040b14;
+  --color-accent: #63e6be; --color-accent-hi: #8af5d5; --color-accent-deep: #18a77d;
+  --color-accent-ink: #04150f; --color-focus: #63e6be; --color-accent-2: #a6b9ff;
+  --color-day-ink: #f5f9ff; --color-day-muted: #c2d1df;
+  --glass: rgba(10,28,48,.78); --glass-blur: 20px;
+  --color-well: #edf4f8; --color-well-2: #e4eef4; --color-well-ink: #07111f;
+  --color-well-muted: #536b80; --color-well-rule: #d2e0e8; --color-card: #fff;
+  --radius-card: 12px; --radius-inner: 8px;
+}
+body { background: #07111f; }
+header.scrolled { background: rgba(5,16,29,.88); border-bottom-color: rgba(145,174,203,.18); }
+.logo { letter-spacing: -.045em; }
+.logo em { color: var(--color-accent); }
+.btn { background: var(--color-accent); border-radius: 7px; font-weight: 600; }
+.btn:hover { background: var(--color-accent-hi); box-shadow: 0 0 0 4px rgba(99,230,190,.16); }
+.btn-ghost { border-radius: 7px; background: rgba(255,255,255,.04); }
+.hero { min-height: 760px; padding-bottom: 110px; }
+.hero__photo { opacity: .17; mix-blend-mode: screen; filter: saturate(.55) hue-rotate(150deg); }
+.hero__scrim { background: radial-gradient(ellipse 58% 70% at 20% 42%, rgba(19,87,112,.52), transparent 75%), linear-gradient(115deg, #07111f 4%, rgba(7,17,31,.86) 50%, rgba(7,17,31,.5)), linear-gradient(to bottom, transparent 64%, #07111f); }
+.hero h1 { color: #f7fbff; font-size: clamp(38px, 5vw, 64px); letter-spacing: -.045em; }
+.hero h1 strong, .hero .sub strong { color: var(--color-accent); }
+.hero .sub { color: #b5c9da; }
+.glass { box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 24px 70px rgba(0,0,0,.26); border: 1px solid rgba(145,174,203,.16); }
+.panel { background: rgba(11,29,49,.8); }
+.panel__sum { color: #fff; }
+.panel .amt { color: var(--color-accent); }
+.claim { background: rgba(99,230,190,.08); border-color: rgba(99,230,190,.28); }
+.claim b, .claim a { color: var(--color-accent); }
+.tally { background: #09192b; }
+.tcell .v { color: #f5f9ff; }
+section { padding: 104px 0; }
+.sec-head h2 { letter-spacing: -.045em; }
+.well { box-shadow: 0 16px 50px rgba(0,0,0,.14); }
+.card { border: 1px solid #dce8ee; }
+.card .btn { background: var(--color-accent-deep); }
+.sort button.active, .sort button:hover { color: var(--color-accent); }
+.exrow:hover { background: rgba(99,230,190,.055); }
+.exrow .rate { color: var(--color-accent); }
+.close__photo { opacity: .2; filter: hue-rotate(150deg) saturate(.7); }
+.close__scrim { background: linear-gradient(120deg, rgba(7,17,31,.96), rgba(7,17,31,.75)), linear-gradient(to top, #07111f, transparent); }
+.close h2, .close p { color: #f5f9ff; }
+.signup { background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+footer { background: #050d18; }
+/* ---- footer ---- */
+footer { border-top: 1px solid var(--color-rule); padding: 52px 0 36px; color: var(--color-muted); font-size: 14px; }
+.fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 36px; }
+@media (max-width: 720px) { .fgrid { grid-template-columns: 1fr 1fr; } }
+footer h4 { font: 500 14.5px var(--font-body); color: var(--color-ink); margin-bottom: 12px; }
+footer li { list-style: none; margin-bottom: 9px; }
+footer a:hover { color: var(--color-ink); }
+.disclaimer { font-size: 12.5px; border-top: 1px solid var(--color-rule); padding-top: 22px; line-height: 1.7; }
+.credit { margin-top: 10px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap"><nav>
+    <a href="#" class="logo">Max<em>Back</em></a>
+    <div class="nav-links">
+      <a href="#calc" data-i18n="nav.calc">Máy tính</a>
+      <a href="#exchanges" data-i18n="nav.ex">Sàn đối tác</a>
+      <a href="#compare" data-i18n="nav.cmp">So sánh</a>
+      <a href="#faq" data-i18n="nav.faq">Câu hỏi</a>
+    </div>
+    <div class="nav-right">
+      <select class="lang" id="langSel" aria-label="Language"></select>
+      <a class="btn" href="#signup" data-i18n="nav.signup">Đăng ký</a>
+    </div>
+  </nav></div>
+</header>
+
+<div class="hero">
+  <img class="hero__photo" src="photos/fog.jpg" alt="">
+  <div class="hero__scrim"></div>
+  <div class="wrap hero__inner">
+    <div>
+      <h1 data-i18n="hero.h1">Phí giao dịch của bạn đang nuôi ví của người khác.</h1>
+      <p class="sub" data-i18n-html="hero.sub">MaxBack trả lại tới <strong>90% phí futures bằng USDT</strong> — tự động mỗi ngày, qua quan hệ đối tác chính thức với 19 sàn. Không API key, không rủi ro tài khoản.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#calc" data-i18n="hero.cta1">Tính số tiền nhận lại</a>
+        <a class="btn btn-ghost" href="#exchanges" data-i18n="hero.cta2" style="background:oklch(22% 0.022 268 / 0.06);color:var(--color-day-ink);box-shadow:inset 0 0 0 1px oklch(22% 0.022 268 / 0.18)">Xem tỷ lệ 19 sàn</a>
+      </div>
+      <p class="hero__note" data-i18n="hero.note">Rút từ 10 USDT · Chỉ cần UID công khai · Hỗ trợ 24/7</p>
+    </div>
+    <div class="glass panel">
+      <div class="panel__head">
+        <span class="panel__title" data-i18n="panel.title">Cashback của bạn</span>
+        <span class="panel__period" data-i18n="panel.period">30 ngày qua</span>
+      </div>
+      <div class="panel__sum num">1.284<span class="c">,52 USDT</span></div>
+      <div class="panel__rows">
+        <a class="prow" href="/reg/bitget"><span class="dot"></span><img src="logos/bitget.png" alt="Bitget"><div><div class="nm">Bitget</div><div class="meta" data-meta="412">412 lệnh · đã khớp</div></div><span class="amt num">+486,10</span></a>
+        <a class="prow" href="/reg/bybit"><span class="dot"></span><img src="logos/bybit.png" alt="Bybit"><div><div class="nm">Bybit</div><div class="meta" data-meta="268">268 lệnh · đã khớp</div></div><span class="amt num">+352,74</span></a>
+        <a class="prow" href="/reg/okx"><span class="dot"></span><img src="logos/okx.png" alt="OKX"><div><div class="nm">OKX</div><div class="meta" data-meta="190">190 lệnh · đã khớp</div></div><span class="amt num">+261,33</span></a>
+        <a class="prow" href="/reg/mexc"><span class="dot"></span><img src="logos/mexc.png" alt="MEXC"><div><div class="nm">MEXC</div><div class="meta" data-meta="124">124 lệnh · đã khớp</div></div><span class="amt num">+184,35</span></a>
+      </div>
+      <div class="claim"><span data-i18n-html="panel.avail">Khả dụng để rút: <b class="num">1.284,52 USDT</b></span><a href="#signup" data-i18n="panel.withdraw">Rút ngay →</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="tally">
+  <div class="wrap">
+    <div class="tcell"><div class="v num" data-count="328369503">0</div><div class="k" data-i18n="tally.k1">USDT đã hoàn cho người dùng</div></div>
+    <div class="tcell"><div class="v num" data-count="132342">0</div><div class="k" data-i18n="tally.k2">tài khoản đang nhận cashback</div></div>
+    <div class="tcell"><div class="v num" data-count="72353">0</div><div class="k" data-i18n="tally.k3">USDT trả trong 24 giờ qua</div></div>
+    <div class="tcell"><div class="v num">19</div><div class="k" data-i18n="tally.k4">sàn đối tác chính thức</div></div>
+  </div>
+</div>
+
+<section id="calc">
+  <div class="wrap">
+    <div class="well">
+      <div class="sec-head">
+        <h2 data-i18n="calc.h2">Bạn sẽ nhận lại bao nhiêu?</h2>
+        <p data-i18n="calc.sub">Kéo theo khối lượng giao dịch thực tế của bạn. Cashback cộng dồn theo từng lệnh, trả bằng USDT.</p>
+      </div>
+      <div class="calc">
+        <div>
+          <label><span data-i18n="calc.vol">Khối lượng futures mỗi tháng:</span> <span class="range-val num" id="volVal">$500.000</span></label>
+          <input type="range" id="vol" min="10000" max="10000000" step="10000" value="500000" aria-label="Volume">
+          <label for="feeRate" data-i18n="calc.fee">Phí taker của sàn</label>
+          <select id="feeRate">
+            <option value="0.06">0,060% — Bybit, Bitget, MEXC</option>
+            <option value="0.05">0,050% — OKX, Gate</option>
+            <option value="0.045" data-i18n="calc.fee3">0,045% — mức VIP0 phổ biến</option>
+            <option value="0.02" data-i18n="calc.fee4">0,020% — maker trung bình</option>
+          </select>
+          <label for="cbRate" data-i18n="calc.cb">Tỷ lệ cashback</label>
+          <select id="cbRate">
+            <option value="0.9" data-i18n="calc.cb1">90% — hạng cao nhất</option>
+            <option value="0.8" data-i18n="calc.cb2">80%</option>
+            <option value="0.7" selected>70% — mặc định</option>
+            <option value="0.6">60%</option>
+          </select>
+        </div>
+        <div class="card">
+          <div class="cap" data-i18n="calc.cap">Bạn nhận lại mỗi tháng</div>
+          <div class="big num" id="monthly">$240</div>
+          <div class="crow"><span data-i18n="calc.feePaid">Phí trả cho sàn</span><b class="num" id="feePaid">$300</b></div>
+          <div class="crow owed"><span data-i18n="calc.netFee">Phí thực còn lại</span><b class="num" id="netFee">$60</b></div>
+          <div class="crow"><span data-i18n="calc.yearly">Nhận lại mỗi năm</span><b class="num" id="yearly">$2.880</b></div>
+          <a class="btn" id="calcCta" href="/reg/bitget" data-i18n="calc.btn">Bắt đầu nhận lại</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="steps.h2">Ba bước, năm phút</h2>
+      <p data-i18n="steps.sub">Không API key giao dịch, không chuyển tiền, không thay đổi cách bạn trade.</p>
+    </div>
+    <div class="steps">
+      <div class="steprow"><span class="n num">01</span><h3 data-i18n="steps.t1">Đăng ký sàn qua liên kết MaxBack</h3><p data-i18n="steps.p1">Mở tài khoản mới trên sàn đối tác bằng mã giới thiệu chính thức của chúng tôi — hoàn toàn hợp lệ theo điều khoản của sàn.</p></div>
+      <div class="steprow"><span class="n num">02</span><h3 data-i18n="steps.t2">Liên kết UID</h3><p data-i18n="steps.p2">Dán UID sàn vào bảng điều khiển MaxBack. Chỉ cần UID công khai; không API key, không quyền truy cập ví.</p></div>
+      <div class="steprow"><span class="n num">03</span><h3 data-i18n="steps.t3">Giao dịch, nhận USDT mỗi ngày</h3><p data-i18n="steps.p3">Hệ thống đối soát phí tự động và cộng cashback vào số dư của bạn hàng ngày. Rút từ 10 USDT.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="exchanges" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="ex.h2">21 đối tác crypto & Forex, tỷ lệ công khai</h2>
+      <p data-i18n="ex.sub">Crypto và Forex trên cùng một bảng. Tỷ lệ ghi rõ cạnh từng đối tác, cập nhật khi chính sách thay đổi.</p>
+    </div>
+    <div class="sort" role="tablist">
+      <button class="active" data-sort="rate" data-i18n="ex.sortRate">Cashback cao nhất</button>
+      <button data-sort="popular" data-i18n="ex.sortPop">Phổ biến nhất</button>
+      <button data-sort="name" data-i18n="ex.sortName">Theo tên</button>
+    </div>
+    <div class="exlist" id="exList"></div>
+    <p class="ex-note" data-i18n-html="ex.note">Tìm thấy nơi nào trả cao hơn? <b>Cam kết Cashback Tốt nhất</b> — báo cho chúng tôi, chúng tôi bù phần chênh lệch.</p>
+  </div>
+</section>
+
+<section id="compare" style="padding-top:0">
+  <div class="wrap">
+    <div class="cmp-well">
+      <h2 data-i18n="cmp.h2">Tiền hoa hồng từ phí của bạn đang đi đâu?</h2>
+      <p class="intro" data-i18n="cmp.intro">Mỗi lệnh bạn đặt đều sinh hoa hồng giới thiệu. Câu hỏi duy nhất: ai là người nhận nó?</p>
+      <div class="cmp-scroll"><table class="cmp">
+        <thead><tr><th data-i18n="cmp.hCrit">Tiêu chí</th><th data-i18n="cmp.hKol">Link YouTuber / KOL</th><th data-i18n="cmp.hSelf">Tự giới thiệu</th><th>MaxBack</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="cmp.r1q">Ai nhận hoa hồng?</td><td class="no" data-i18n="cmp.r1a">KOL — vĩnh viễn</td><td data-i18n="cmp.r1b">Bạn, nếu không bị phát hiện</td><td class="yes" data-i18n="cmp.r1c">Bạn — tới 90%</td></tr>
+          <tr><td data-i18n="cmp.r2q">Trên $200 phí giao dịch</td><td class="no" data-i18n="cmp.r2a">$0 về tay bạn</td><td data-i18n="cmp.r2b">~$100, kèm rủi ro</td><td class="yes" data-i18n="cmp.r2c">$160–180 bằng USDT</td></tr>
+          <tr><td data-i18n="cmp.r3q">Rủi ro tài khoản</td><td data-i18n="cmp.r3a">Không, nhưng mất tiền</td><td class="no" data-i18n="cmp.r3b">Khóa tài khoản vĩnh viễn</td><td class="yes" data-i18n="cmp.r3c">Không — đối tác chính thức</td></tr>
+          <tr><td data-i18n="cmp.r4q">Tần suất thanh toán</td><td class="no" data-i18n="cmp.r4a">Không bao giờ</td><td data-i18n="cmp.r4b">Thủ công, bấp bênh</td><td class="yes" data-i18n="cmp.r4c">Tự động hàng ngày</td></tr>
+          <tr><td data-i18n="cmp.r5q">Minh bạch số dư</td><td class="no" data-i18n="cmp.r5a">Không</td><td data-i18n="cmp.r5b">Không</td><td class="yes" data-i18n="cmp.r5c">Bảng điều khiển thời gian thực</td></tr>
+          <tr><td data-i18n="cmp.r6q">Giá trị dài hạn</td><td class="no" data-i18n="cmp.r6a">Bằng 0</td><td class="no" data-i18n="cmp.r6b">Âm — mất tài khoản</td><td class="yes" data-i18n="cmp.r6c">Cộng dồn theo mỗi lệnh</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="feed.h2">Thanh toán theo thời gian thực</h2>
+      <p data-i18n="feed.sub">Ai đó đang rút cashback ngay lúc này.</p>
+    </div>
+    <div class="glass feed">
+      <div class="feed-head"><span class="live-dot"></span> <span data-i18n="feed.title">Rút tiền trực tiếp</span></div>
+      <div class="frow fhead"><span data-i18n="feed.colUid">UID · Sàn</span><span data-i18n="feed.colAmt">Số tiền (USDT)</span><span class="tm" data-i18n="feed.colTime">Thời gian</span><span data-i18n="feed.colStatus">Trạng thái</span></div>
+      <div id="feedBody"></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="faq.h2">Câu hỏi thường gặp</h2>
+      <p data-i18n="faq.sub">Chưa thấy câu trả lời? Hỗ trợ trực tiếp 24/7.</p>
+    </div>
+    <div class="faq">
+      <details open><summary data-i18n="faq.q1">MaxBack có an toàn không?</summary><div class="body" data-i18n="faq.a1">Có. Chúng tôi chỉ dùng UID công khai để đối soát phí với sàn — không yêu cầu API key, không bao giờ chạm vào tiền của bạn. Tài khoản giao dịch hoàn toàn thuộc quyền kiểm soát của bạn.</div></details>
+      <details><summary data-i18n="faq.q2">Tiền cashback đến từ đâu?</summary><div class="body" data-i18n="faq.a2">Từ chính quỹ hoa hồng giới thiệu mà sàn vẫn trả cho YouTuber và admin Telegram. MaxBack là đối tác chính thức của sàn, nhận khoản hoa hồng đó và trả lại phần lớn cho bạn — người tạo ra nó.</div></details>
+      <details><summary data-i18n="faq.q3">Khác gì so với mã giới thiệu thông thường?</summary><div class="body" data-i18n="faq.a3">Mã giới thiệu cho bạn giảm giá một lần, còn hoa hồng liên tục chảy về chủ mã. MaxBack trả lại tới 90% phí giao dịch của bạn, bằng USDT, mỗi ngày, vô thời hạn.</div></details>
+      <details><summary data-i18n="faq.q4">Tôi đã có tài khoản sàn rồi thì sao?</summary><div class="body" data-i18n="faq.a4">Tài khoản mới nhận cashback ngay từ lệnh đầu tiên. Với tài khoản hiện có, khả năng chuyển attribution phụ thuộc chính sách từng sàn — liên hệ hỗ trợ để kiểm tra phương án.</div></details>
+      <details><summary data-i18n="faq.q5">Điều kiện rút tiền?</summary><div class="body" data-i18n="faq.a5">Rút được khi số dư đạt tối thiểu 10 USDT. Thanh toán bằng USDT về ví sàn của bạn, xử lý tự động hàng ngày.</div></details>
+      <details><summary data-i18n="faq.q6">Nếu tôi tìm thấy tỷ lệ cao hơn?</summary><div class="body" data-i18n="faq.a6">Cam kết Cashback Tốt nhất: tìm thấy nơi nào trả cao hơn, báo cho chúng tôi — chúng tôi bù chênh lệch theo điều kiện công bố tại Trung tâm trợ giúp.</div></details>
+    </div>
+  </div>
+</section>
+
+<div class="close" id="signup">
+  <img class="close__photo" src="photos/estuary.jpg" alt="">
+  <div class="close__scrim"></div>
+  <div class="wrap close__inner">
+    <h2 data-i18n="close.h2">Phí của bạn đang sinh hoa hồng cho ai đó. Hãy chắc chắn đó là bạn.</h2>
+    <p data-i18n="close.p">Đăng ký miễn phí trong 2 phút. Thưởng chào mừng tới 10.000 USDT.</p>
+    <form class="signup" id="signupForm">
+      <input type="email" required placeholder="Email của bạn" data-i18n-ph="close.ph" aria-label="Email">
+      <button class="btn" type="submit" data-i18n="close.btn">Bắt đầu nhận Cashback</button>
+    </form>
+    <p class="signup-note" id="signupNote" data-i18n="close.note">Không spam. Hủy bất cứ lúc nào.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo" style="margin-bottom:10px">Max<em>Back</em></div>
+        <p data-i18n="foot.about">Nền tảng hoàn phí giao dịch crypto qua quan hệ đối tác chính thức với 19 sàn hàng đầu trên CoinMarketCap.</p>
+        <p style="margin-top:10px;font-size:13px" data-i18n-html="foot.project">Một dự án của <a href="https://cspaceship.agency" style="color:var(--color-accent)">cspaceship.agency</a></p>
+      </div>
+      <div><h4 data-i18n="foot.product">Sản phẩm</h4><ul><li><a href="#calc" data-i18n="nav.calc">Máy tính Cashback</a></li><li><a href="#exchanges" data-i18n="nav.ex">Sàn đối tác</a></li><li><a href="#compare" data-i18n="nav.cmp">So sánh</a></li></ul></div>
+      <div><h4 data-i18n="foot.company">Công ty</h4><ul><li><a href="#" data-i18n="foot.c1">Về chúng tôi</a></li><li><a href="#" data-i18n="foot.c2">Thông báo</a></li><li><a href="#" data-i18n="foot.c3">Đối tác liên kết</a></li></ul></div>
+      <div><h4 data-i18n="foot.legal">Pháp lý</h4><ul><li><a href="#" data-i18n="foot.g1">Điều khoản dịch vụ</a></li><li><a href="#" data-i18n="foot.g2">Chính sách bảo mật</a></li><li><a href="#faq" data-i18n="foot.g3">Trung tâm trợ giúp</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <span data-i18n="foot.disc">© 2026 MaxBack — a cspaceship.agency project. Trang demo phục vụ mục đích học tập — lấy cảm hứng từ mô hình fee-cashback. Giao dịch hợp đồng tương lai tiền mã hóa có rủi ro cao; cashback không bù đắp được thua lỗ giao dịch. Đây không phải lời khuyên đầu tư.</span>
+      <div class="credit" data-i18n="foot.credit">Ảnh hoàng hôn: thư viện ảnh mở của Hallmark (Wikimedia Commons, giấy phép mở). Logo sàn thuộc về chủ sở hữu tương ứng, dùng để nhận diện.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---------- i18n ----------
+const LOCALES = {
+  vi: { name: "Tiếng Việt", nf: "vi-VN" },
+  en: { name: "English", nf: "en-US" },
+  ko: { name: "한국어", nf: "ko-KR" },
+  jp: { name: "日本語", nf: "ja-JP" },
+  sc: { name: "简体中文", nf: "zh-CN" },
+  tc: { name: "繁體中文", nf: "zh-TW" },
+  es: { name: "Español", nf: "es-ES" },
+  pt: { name: "Português", nf: "pt-BR" },
+  fr: { name: "Français", nf: "fr-FR" },
+  ru: { name: "Русский", nf: "ru-RU" },
+  ar: { name: "العربية", nf: "ar", rtl: true },
+  id: { name: "Bahasa Indonesia", nf: "id-ID" },
+  tr: { name: "Türkçe", nf: "tr-TR" },
+  mn: { name: "Монгол", nf: "mn-MN" },
+  uz: { name: "O'zbekcha", nf: "uz-UZ" },
+};
+// vi defaults for JS-generated strings
+const VI_DEFAULTS = {
+  "panel.meta": "{n} lệnh · đã khớp",
+  "ex.tag": "cashback phí futures",
+  "ex.tagForex": "cashback spread Forex",
+  "feed.done": "Hoàn thành",
+  "feed.processing": "Đang xử lý",
+  "close.demo": "Đã ghi nhận {email} — đây là bản demo, chưa gửi dữ liệu đi đâu.",
+};
+let T = Object.assign({}, VI_DEFAULTS);
+let LANG = "vi", NF = "vi-VN";
+
+const langSel = document.getElementById("langSel");
+for (const [code, m] of Object.entries(LOCALES)) {
+  const o = document.createElement("option");
+  o.value = code; o.textContent = m.name;
+  langSel.appendChild(o);
+}
+function applyT() {
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = T[el.dataset.i18n]; if (v) el.textContent = v; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = T[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => { const v = T[el.dataset.i18nPh]; if (v) el.placeholder = v; });
+  document.querySelectorAll("[data-i18n-content]").forEach(el => { const v = T[el.dataset.i18nContent]; if (v) el.content = v; });
+  document.querySelectorAll("[data-meta]").forEach(el => { el.textContent = (T["panel.meta"] || "{n}").replace("{n}", el.dataset.meta); });
+}
+async function setLang(code, save) {
+  if (!LOCALES[code]) code = "vi";
+  LANG = code; NF = LOCALES[code].nf;
+  document.documentElement.lang = code === "jp" ? "ja" : code === "sc" ? "zh-Hans" : code === "tc" ? "zh-Hant" : code;
+  document.documentElement.dir = LOCALES[code].rtl ? "rtl" : "ltr";
+  langSel.value = code;
+  if (save) try { localStorage.setItem("lang", code); } catch {}
+  if (code === "vi") {
+    T = Object.assign({}, VI_DEFAULTS);
+  } else {
+    try {
+      const r = await fetch(`i18n/${code}.json`);
+      T = Object.assign({}, VI_DEFAULTS, await r.json());
+    } catch (e) { console.warn("i18n load failed", code, e); }
+  }
+  applyT();
+  updateCalc();
+  renderEx(currentSort);
+  feedBody.innerHTML = "";
+  for (let i = 0; i < 5; i++) feedRow(true);
+}
+langSel.addEventListener("change", () => setLang(langSel.value, true));
+
+// ---------- data ----------
+const EXCHANGES = [
+  { name: "Bitget",    slug: "bitget",    rate: 90, pop: 10 },
+  { name: "WOO X",     slug: "woox",      rate: 90, pop: 5 },
+  { name: "Toobit",    slug: "toobit",    rate: 85, pop: 5 },
+  { name: "Bitunix",   slug: "bitunix",   rate: 85, pop: 3 },
+  { name: "WEEX",      slug: "weex",      rate: 82, pop: 3 },
+  { name: "Bybit",     slug: "bybit",     rate: 80, pop: 9 },
+  { name: "MEXC",      slug: "mexc",      rate: 80, pop: 7 },
+  { name: "Gate",      slug: "gate",      rate: 80, pop: 6 },
+  { name: "CoinW",     slug: "coinw",     rate: 80, pop: 4 },
+  { name: "XT.com",    slug: "xt",        rate: 80, pop: 3 },
+  { name: "UEEx",      slug: "ueex",      rate: 80, pop: 1 },
+  { name: "BingX",     slug: "bingx",     rate: 78, pop: 6 },
+  { name: "LBank",     slug: "lbank",     rate: 78, pop: 2 },
+  { name: "OKX",       slug: "okx",       rate: 75, pop: 8 },
+  { name: "Phemex",    slug: "phemex",    rate: 75, pop: 4 },
+  { name: "Bitrue",    slug: "bitrue",    rate: 75, pop: 2 },
+  { name: "DigiFinex", slug: "digifinex", rate: 75, pop: 2 },
+  { name: "KuCoin",    slug: "kucoin",    rate: 72, pop: 6 },
+  { name: "HTX",       slug: "htx",       rate: 70, pop: 5 },
+  { name: "BloFin",     slug: "blofin",     rate: 70, pop: 4 },
+  { name: "Binance",    slug: "binance",    rate: 70, pop: 0 },
+  { name: "PU Prime",    slug: "puprime",    rate: 60, pop: 3, type: "Forex", logo: "puprime.svg" },
+  { name: "Vantage",     slug: "vantage",    rate: 55, pop: 3, type: "Forex", logo: "vantage.svg" },
+];
+
+// ---------- nav scroll state ----------
+const hdr = document.getElementById("hdr");
+const onScroll = () => hdr.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.55);
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// ---------- calculator ----------
+const fmt = n => "$" + Math.round(n).toLocaleString(NF);
+function cashback(vol, feePct, cbPct) { // ponytail: taker-only model; add maker/taker split when users ask
+  const fee = vol * feePct / 100;
+  return { fee, back: fee * cbPct, net: fee * (1 - cbPct) };
+}
+function updateCalc() {
+  const vol = +document.getElementById("vol").value;
+  const r = cashback(vol, +document.getElementById("feeRate").value, +document.getElementById("cbRate").value);
+  document.getElementById("volVal").textContent = fmt(vol);
+  document.getElementById("monthly").textContent = fmt(r.back);
+  document.getElementById("feePaid").textContent = fmt(r.fee);
+  document.getElementById("netFee").textContent = fmt(r.net);
+  document.getElementById("yearly").textContent = fmt(r.back * 12);
+}
+["vol", "feeRate", "cbRate"].forEach(id => document.getElementById(id).addEventListener("input", updateCalc));
+updateCalc();
+console.assert(Math.abs(cashback(500000, 0.06, 0.8).back - 240) < 1e-9, "calc self-check");
+
+// ---------- tally counters ----------
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const io = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = +el.dataset.count;
+  io.unobserve(el);
+  if (!target || reduced) { el.textContent = (+el.dataset.count || el.textContent).toLocaleString(NF); return; }
+  const t0 = performance.now(), dur = 1400;
+  (function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString(NF);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}), { threshold: 0.4 });
+document.querySelectorAll("[data-count]").forEach(el => io.observe(el));
+
+// ---------- exchange list ----------
+const exList = document.getElementById("exList");
+let currentSort = "rate";
+function renderEx(sort) {
+  currentSort = sort;
+  const list = [...EXCHANGES].sort((a, b) =>
+    sort === "name" ? a.name.localeCompare(b.name, NF) :
+    sort === "popular" ? b.pop - a.pop : b.rate - a.rate);
+  exList.innerHTML = list.map(x => `
+    <a class="exrow" href="/reg/${encodeURIComponent(x.slug)}" data-slug="${x.slug}">
+      <img src="logos/${x.logo || `${x.slug}.png`}" alt="${x.name}" loading="lazy" width="32" height="32">
+      <div><div class="nm">${x.name}</div><div class="tag">${x.type === "Forex" ? (T["ex.tagForex"] || "cashback spread Forex") : T["ex.tag"]}</div></div>
+      <span class="rate num">${x.rate}%<small>USDT</small></span>
+      <span class="go" aria-hidden="true">→</span>
+    </a>`).join("");
+}
+renderEx("rate");
+// the calculator's primary action follows the cashback tier the visitor picked:
+// the best exchange that still meets or beats that rate
+function syncCalcCta() {
+  const want = Math.round(+document.getElementById("cbRate").value * 100);
+  const eligible = EXCHANGES.filter(x => x.rate >= want).sort((a, b) => b.rate - a.rate);
+  const best = eligible[0] || EXCHANGES.slice().sort((a, b) => b.rate - a.rate)[0];
+  document.getElementById("calcCta").href = "/reg/" + encodeURIComponent(best.slug);
+}
+document.getElementById("cbRate").addEventListener("change", syncCalcCta);
+syncCalcCta();
+document.querySelectorAll(".sort button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".sort button").forEach(x => x.classList.remove("active"));
+  b.classList.add("active");
+  renderEx(b.dataset.sort);
+}));
+
+// ---------- live feed ----------
+const feedBody = document.getElementById("feedBody");
+function feedRow(initial) {
+  const x = EXCHANGES[Math.floor(Math.random() * EXCHANGES.length)];
+  const uid = "······" + Math.floor(1000 + Math.random() * 9000);
+  const amt = (Math.random() * 180 + 10).toLocaleString(NF, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const tm = new Date().toLocaleTimeString(NF, { hour: "2-digit", minute: "2-digit" });
+  const open = Math.random() < 0.2;
+  const row = document.createElement("div");
+  row.className = "frow" + (initial ? "" : " new");
+  row.innerHTML = `<span>${uid} · ${x.name}</span><span class="amt num">+${amt}</span><span class="tm num">${tm}</span><span class="st ${open ? "open" : "done"}">${open ? T["feed.processing"] : T["feed.done"]}</span>`;
+  feedBody.prepend(row);
+  while (feedBody.children.length > 6) feedBody.lastChild.remove();
+}
+for (let i = 0; i < 5; i++) feedRow(true);
+setInterval(feedRow, 4000);
+
+// ---------- signup (demo) ----------
+document.getElementById("signupForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const email = e.target.querySelector("input").value.trim();
+  if (!email) return;
+  document.getElementById("signupNote").textContent = (T["close.demo"] || "{email}").replace("{email}", email);
+  e.target.reset();
+});
+
+// ---------- boot language ----------
+const urlLang = new URLSearchParams(location.search).get("lang");
+let saved = null; try { saved = localStorage.getItem("lang"); } catch {}
+const nav = (navigator.language || "vi").toLowerCase();
+const guess = nav.startsWith("vi") ? "vi" : nav.startsWith("ko") ? "ko" : nav.startsWith("ja") ? "jp"
+  : nav.startsWith("zh-tw") || nav.startsWith("zh-hant") ? "tc" : nav.startsWith("zh") ? "sc"
+  : nav.startsWith("es") ? "es" : nav.startsWith("pt") ? "pt" : nav.startsWith("fr") ? "fr"
+  : nav.startsWith("ru") ? "ru" : nav.startsWith("ar") ? "ar" : nav.startsWith("id") ? "id"
+  : nav.startsWith("tr") ? "tr" : nav.startsWith("mn") ? "mn" : nav.startsWith("uz") ? "uz" : "en";
+setLang(urlLang || saved || guess, false);
+</script>
+</body>
+</html>

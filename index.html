@@ -590,27 +590,27 @@ langSel.addEventListener("change", () => setLang(langSel.value, true));
 
 // ---------- data ----------
 const EXCHANGES = [
-  { name: "Bitget",    slug: "bitget",    rate: 90, pop: 10 },
-  { name: "WOO X",     slug: "woox",      rate: 90, pop: 5 },
-  { name: "Toobit",    slug: "toobit",    rate: 85, pop: 5 },
-  { name: "Bitunix",   slug: "bitunix",   rate: 85, pop: 3 },
+  { name: "Bitget",    slug: "bitget",    rate: 77, pop: 10 },
+  { name: "WOO X",     slug: "woox",      rate: 93, pop: 5 },
+  { name: "Toobit",    slug: "toobit",    rate: 65, pop: 5 },
+  { name: "Bitunix",   slug: "bitunix",   rate: 75, pop: 3 },
   { name: "WEEX",      slug: "weex",      rate: 82, pop: 3 },
-  { name: "Bybit",     slug: "bybit",     rate: 80, pop: 9 },
-  { name: "MEXC",      slug: "mexc",      rate: 80, pop: 7 },
-  { name: "Gate",      slug: "gate",      rate: 80, pop: 6 },
+  { name: "Bybit",     slug: "bybit",     rate: 64, pop: 9 },
+  { name: "MEXC",      slug: "mexc",      rate: 50, pop: 7 },
+  { name: "Gate",      slug: "gate",      rate: 75, pop: 6 },
   { name: "CoinW",     slug: "coinw",     rate: 80, pop: 4 },
   { name: "XT.com",    slug: "xt",        rate: 80, pop: 3 },
   { name: "UEEx",      slug: "ueex",      rate: 80, pop: 1 },
-  { name: "BingX",     slug: "bingx",     rate: 78, pop: 6 },
-  { name: "LBank",     slug: "lbank",     rate: 78, pop: 2 },
-  { name: "OKX",       slug: "okx",       rate: 75, pop: 8 },
+  { name: "BingX",     slug: "bingx",     rate: 60, pop: 6 },
+  { name: "LBank",     slug: "lbank",     rate: 71, pop: 2 },
+  { name: "OKX",       slug: "okx",       rate: 55, pop: 8 },
   { name: "Phemex",    slug: "phemex",    rate: 75, pop: 4 },
   { name: "Bitrue",    slug: "bitrue",    rate: 75, pop: 2 },
   { name: "DigiFinex", slug: "digifinex", rate: 75, pop: 2 },
   { name: "KuCoin",    slug: "kucoin",    rate: 72, pop: 6 },
-  { name: "HTX",       slug: "htx",       rate: 70, pop: 5 },
+  { name: "HTX",       slug: "htx",       rate: 54, pop: 5 },
   { name: "BloFin",     slug: "blofin",     rate: 70, pop: 4 },
-  { name: "Binance",    slug: "binance",    rate: 70, pop: 0 },
+  { name: "Binance",    slug: "binance",    rate: 20, pop: 0 },
   { name: "PU Prime",    slug: "puprime",    rate: 60, pop: 3, type: "Forex", logo: "puprime.svg" },
   { name: "Vantage",     slug: "vantage",    rate: 55, pop: 3, type: "Forex", logo: "vantage.svg" },
 ];
@@ -683,6 +683,18 @@ function syncCalcCta() {
 }
 document.getElementById("cbRate").addEventListener("change", syncCalcCta);
 syncCalcCta();
+// live rates from D1 (admin edits show up here); paused exchanges are hidden
+fetch("/api/links", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(d => {
+  if (!d || !Array.isArray(d.exchanges)) return;
+  const by = Object.fromEntries(d.exchanges.map(e => [e.slug, e]));
+  for (let i = EXCHANGES.length - 1; i >= 0; i--) {
+    const e = by[EXCHANGES[i].slug];
+    if (!e) continue;
+    if (e.status !== "active") { EXCHANGES.splice(i, 1); continue; }
+    EXCHANGES[i].rate = +e.rate; EXCHANGES[i].pop = +e.pop;
+  }
+  renderEx(currentSort); syncCalcCta();
+}).catch(() => {});
 document.querySelectorAll(".sort button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll(".sort button").forEach(x => x.classList.remove("active"));
   b.classList.add("active");

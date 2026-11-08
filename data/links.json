@@ -29,6 +29,10 @@
     { "slug": "mgbx",      "name": "MGBX",      "rate": 80, "pop": 2,  "url": "https://www.mgbx.com/",         "status": "active" },
     { "slug": "bitbase",   "name": "Bitbase",   "rate": 40, "pop": 2,  "url": "https://www.bitbase.com/",       "status": "active" },
     { "slug": "cmc",       "name": "CMC Markets", "rate": 40, "pop": 3, "url": "https://partner-portal.cmcmarkets.com/Affiliates/SignUp?Referral=22062", "status": "active", "type": "Forex" },
+    { "slug": "gtc", "name": "GTC", "rate": 40, "pop": 3, "url": "https://mygtcportal.com/agent_register?token=Aitlcowwe2owwwww", "status": "active", "type": "Forex" },
+    { "slug": "ultima", "name": "Ultima Markets", "rate": 40, "pop": 3, "url": "https://ultgo.com/la-com/vn/V8EZnFf8", "status": "active", "type": "Forex" },
+    { "slug": "startrader", "name": "StarTrader", "rate": 40, "pop": 3, "url": "https://www.startrader.com/vn/live-account/?affid=MjQzODM2ODQ=&ibpRebateCode=MjQzODM2ODRTVDEwMjEy", "status": "active", "type": "Forex" },
+    { "slug": "hfm", "name": "HFM", "rate": 40, "pop": 3, "url": "https://www.hfreg-vn.com/sv/en/?refid=372195&acid=l823wzrjtr", "status": "active", "type": "Forex" },
     { "slug": "puprime",   "name": "PU Prime",   "rate": 60, "pop": 3,  "url": "https://www.puprime.com/",       "status": "active", "type": "Forex" },
     { "slug": "vantage",   "name": "Vantage",    "rate": 55, "pop": 3,  "url": "https://www.vantagemarkets.com/", "status": "active", "type": "Forex" }
   ]

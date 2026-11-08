@@ -28,6 +28,10 @@ INSERT INTO exchange_links (slug,name,rate,pop,url,status,type) values
 ('mgbx','MGBX',80,2,'https://www.mgbx.com/','active','Crypto'),
 ('bitbase','Bitbase',40,2,'https://www.bitbase.com/','active','Crypto'),
 ('cmc','CMC Markets',40,3,'https://partner-portal.cmcmarkets.com/Affiliates/SignUp?Referral=22062','active','Forex'),
+('gtc','GTC',40,3,'https://mygtcportal.com/agent_register?token=Aitlcowwe2owwwww','active','Forex'),
+('ultima','Ultima Markets',40,3,'https://ultgo.com/la-com/vn/V8EZnFf8','active','Forex'),
+('startrader','StarTrader',40,3,'https://www.startrader.com/vn/live-account/?affid=MjQzODM2ODQ=&ibpRebateCode=MjQzODM2ODRTVDEwMjEy','active','Forex'),
+('hfm','HFM',40,3,'https://www.hfreg-vn.com/sv/en/?refid=372195&acid=l823wzrjtr','active','Forex'),
 ('vantage','Vantage',55,3,'https://www.vantagemarkets.com/','active','Forex')
 on conflict (slug) do update set name=excluded.name,rate=excluded.rate,pop=excluded.pop,url=excluded.url,status=excluded.status,type=excluded.type,updated_at=datetime('now');
 

@@ -22,6 +22,9 @@
     { "slug": "htx",       "name": "HTX",       "rate": 54, "pop": 5,  "url": "https://www.htx.com/",           "status": "active" },
     { "slug": "blofin",    "name": "BloFin",    "rate": 70, "pop": 4,  "url": "https://blofin.com/",            "status": "active" },
     { "slug": "binance",   "name": "Binance",   "rate": 20, "pop": 0,  "url": "https://www.binance.com/",       "status": "active" },
+    { "slug": "deepcoin",  "name": "DeepCoin",  "rate": 75, "pop": 3,  "url": "https://www.deepcoin.com/",     "status": "active" },
+    { "slug": "flipster",  "name": "Flipster",  "rate": 70, "pop": 4,  "url": "https://flipster.io/",           "status": "active" },
+    { "slug": "zoomex",    "name": "Zoomex",    "rate": 50, "pop": 2,  "url": "https://www.zoomex.com/",       "status": "active" },
     { "slug": "puprime",   "name": "PU Prime",   "rate": 60, "pop": 3,  "url": "https://www.puprime.com/",       "status": "active", "type": "Forex" },
     { "slug": "vantage",   "name": "Vantage",    "rate": 55, "pop": 3,  "url": "https://www.vantagemarkets.com/", "status": "active", "type": "Forex" }
   ]

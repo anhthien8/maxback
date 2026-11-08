@@ -21,6 +21,9 @@ INSERT INTO exchange_links (slug,name,rate,pop,url,status,type) values
 ('blofin','BloFin',70,4,'https://blofin.com/','active','Crypto'),
 ('binance','Binance',20,0,'https://www.binance.com/','active','Crypto'),
 ('puprime','PU Prime',60,3,'https://www.puprime.com/','active','Forex'),
+('deepcoin','DeepCoin',75,3,'https://www.deepcoin.com/','active','Crypto'),
+('flipster','Flipster',70,4,'https://flipster.io/','active','Crypto'),
+('zoomex','Zoomex',50,2,'https://www.zoomex.com/','active','Crypto'),
 ('vantage','Vantage',55,3,'https://www.vantagemarkets.com/','active','Forex')
 on conflict (slug) do update set name=excluded.name,rate=excluded.rate,pop=excluded.pop,url=excluded.url,status=excluded.status,type=excluded.type,updated_at=datetime('now');
 

@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS exchange_links (
   rate INTEGER NOT NULL DEFAULT 0 CHECK (rate BETWEEN 0 AND 100),
   pop INTEGER NOT NULL DEFAULT 0,
   url TEXT NOT NULL,
+  home_url TEXT, -- homepage URL carrying the ref code; /reg prefers it over url
   status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active','paused')),
   type TEXT NOT NULL DEFAULT 'Crypto',
   created_at TEXT NOT NULL DEFAULT (datetime('now')),

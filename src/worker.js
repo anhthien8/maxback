@@ -1,5 +1,5 @@
 // MaxBack on Cloudflare Workers + D1.
-//   GET  /reg/:slug   -> 302 to the exchange's referral URL (logs a click)
+//   GET  /reg/:slug   -> 302 to home_url (homepage carrying the ref code) if set, else the referral URL (logs a click)
 //   GET  /api/links   -> list links (public)
 //   PATCH /api/links?slug=x -> update a link (needs x-admin-pass header)
 // Everything else is served from static assets.
@@ -24,7 +24,7 @@ async function sha256(v) {
 async function reg(slug, req, env, ctx) {
   slug = slug.toLowerCase();
   if (!SLUG.test(slug)) return page(400, "Link không hợp lệ", "<h1>Thiếu mã sàn</h1><p>Đường dẫn cần có dạng <b>/reg/ten-san</b>.</p><a href='/'>Về trang chủ</a>");
-  const ex = await env.DB.prepare("SELECT name,url,status FROM exchange_links WHERE slug=?").bind(slug).first();
+  const ex = await env.DB.prepare("SELECT name,COALESCE(NULLIF(home_url,''),url) AS url,status FROM exchange_links WHERE slug=?").bind(slug).first();
   if (!ex) return page(404, "Sàn không tồn tại", `<h1>Không tìm thấy “${esc(slug)}”</h1><p>Sàn này chưa có trong danh sách đối tác.</p><a href='/#exchanges'>Xem các sàn đối tác</a>`);
   if (ex.status !== "active") return page(503, "Sàn tạm dừng", `<h1>${esc(ex.name)} tạm dừng nhận đăng ký</h1><p>Vui lòng chọn sàn khác.</p><a href='/#exchanges'>Xem các sàn đối tác</a>`);
   ctx.waitUntil(env.DB.prepare("INSERT INTO clicks (slug,country) VALUES (?,?)").bind(slug, req.cf?.country || null).run().catch(() => {}));
@@ -34,7 +34,7 @@ async function reg(slug, req, env, ctx) {
 async function links(req, env, url) {
   if (req.method === "GET") {
     const { results } = await env.DB.prepare(
-      "SELECT l.slug,l.name,l.rate,l.pop,l.url,l.status,l.type,(SELECT count(*) FROM clicks c WHERE c.slug=l.slug) AS clicks FROM exchange_links l ORDER BY l.pop DESC"
+      "SELECT l.slug,l.name,l.rate,l.pop,l.url,l.home_url,l.status,l.type,(SELECT count(*) FROM clicks c WHERE c.slug=l.slug) AS clicks FROM exchange_links l ORDER BY l.pop DESC"
     ).all();
     return json({ exchanges: results, source: "d1" });
   }
@@ -44,11 +44,11 @@ async function links(req, env, url) {
   const b = await req.json().catch(() => ({}));
   const rate = Number(b.rate);
   const ok = SLUG.test(slug) && typeof b.name === "string" && b.name.length > 0 && b.name.length <= 100
-    && Number.isInteger(rate) && rate >= 0 && rate <= 100 && /^https?:\/\//i.test(b.url || "") && ["active", "paused"].includes(b.status);
+    && Number.isInteger(rate) && rate >= 0 && rate <= 100 && /^https?:\/\//i.test(b.url || "") && (!b.home_url || /^https?:\/\//i.test(b.home_url)) && ["active", "paused"].includes(b.status);
   if (!ok) return json({ error: "Invalid link fields" }, 400);
   const row = await env.DB.prepare(
-    "UPDATE exchange_links SET name=?,rate=?,url=?,status=?,type=?,updated_at=datetime('now') WHERE slug=? RETURNING *"
-  ).bind(b.name, rate, b.url, b.status, b.type || "Crypto", slug).first();
+    "UPDATE exchange_links SET name=?,rate=?,url=?,home_url=?,status=?,type=?,updated_at=datetime('now') WHERE slug=? RETURNING *"
+  ).bind(b.name, rate, b.url, b.home_url || null, b.status, b.type || "Crypto", slug).first();
   return row ? json(row) : json({ error: "Link not found" }, 404);
 }
 
